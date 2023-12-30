@@ -19,17 +19,13 @@ function divide(a, b) {
 function operate(first, operator, second) {
   switch(operator) {
     case "+":
-      add(first, second);
-      break;
+      return add(first, second);
     case "-":
-      subtract(first, second);
-      break;
+      return subtract(first, second);
     case "*":
-      multiply(first, second);
-      break;
+      return multiply(first, second);
     case "/":
-      divide(first, second);
-      break;   
+      return divide(first, second);
     default:
       return "Operator not recognised"
   }
