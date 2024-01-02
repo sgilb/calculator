@@ -1,4 +1,4 @@
-let firstNumber, operator, secondNumber;
+let displayValue, firstNumber, secondNumber, operator;
 const buttons = document.querySelectorAll(".action");
 
 function add(a, b) {
@@ -33,12 +33,26 @@ function operate(first, operator, second) {
 }
 
 function writeNumber(input, canvas) {
+  let content = canvas.innerText;
   if (
     Number.isInteger(Number(input)) ||
-    (input === "." && !canvas.innerText.includes("."))
+    (input === "." && !content.includes("."))
   ) {
-    canvas.innerText += input;
+    content += input;
   }
+  canvas.innerText = content;
+}
+
+function writeOperator(input, canvas) {
+  let content = canvas.innerText;
+
+  if (
+    !content.match("[-+/x]") &&
+    Number.isInteger(Number(content.slice(-1)))
+  ) {
+    content += input;
+  }
+  canvas.innerText = content;
 }
 
 buttons.forEach((button) => {
@@ -47,9 +61,11 @@ buttons.forEach((button) => {
     const element = e.target;
 
     if (element.classList.contains("clear")) {
-      screen.innerText = "";
+      screen.innerText = ""; // Clear display
     } else if (element.classList.contains("input")) {
       writeNumber(element.innerText, screen);
+    } else if (element.classList.contains("operator")) {
+      writeOperator(element.innerText, screen);
     }
   });
 });
