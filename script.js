@@ -21,7 +21,7 @@ function divide(a, b) {
 function operate(first, operator, second) {
   first = Number(first);
   second = Number(second);
-  
+
   switch (operator) {
     case "+":
       return add(first, second);
@@ -56,16 +56,26 @@ function write(input) {
 function solve(equation) {
   const elements = equation.split(" ");
   console.log(elements);
-  let total = 0;
 
-  for (let i = 0; i < elements.length; i += 3) {
-    let first = elements[i];
-    let operator = elements[i+1];
-    let second = elements[i+2];
+  let first = elements[0];
+  let operator = elements[1];
+  let second = elements[2];
+  let total;
 
-    total += operate(first, operator, second);
-    console.log(total);
+  if (first && !(operator && second)) {
+    total = first;
+  } else if (first && operator && second) {
+    total = operate(first, operator, second)
+  } else {
+    total = 0;
   }
+
+  if (elements.length > 3) {
+    for (let i = 3; i < elements.length; i += 2) {
+      total = operate(total, elements[i], elements[i + 1]);
+    }
+  }
+  console.log(total);
   refreshScreen(total);
 }
 
