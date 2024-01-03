@@ -75,7 +75,9 @@ function solve(equation) {
       total = operate(total, elements[i], elements[i + 1]);
     }
   }
-  
+
+  total = roundToTwoDP(total);
+
   if (total == "Infinity") {
     refreshScreen("You can't divide by 0!");
   } else {
@@ -90,6 +92,10 @@ function removeWhitespace(string) {
 function refreshScreen(content) {
   displayValue = content;
   screen.innerText = displayValue;
+}
+
+function roundToTwoDP(num) {
+  return +(Math.round(num + "e+2")  + "e-2");
 }
 
 buttons.forEach((button) => {
