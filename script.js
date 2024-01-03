@@ -42,30 +42,32 @@ function write(input) {
     Number(removeWhitespace(content).slice(-1))
   );
   const inputIsNumber = Number.isInteger(Number(input));
+  const elements = content.split(" ");
+  const lastElement = elements[elements.length - 1];
 
   if (input.match(/[-+/x]/) && lastCharIsNumber) {
     content += ` ${input} `;
-  } else if (inputIsNumber || (input === "." && !content.includes("."))) {
+  } else if (inputIsNumber || (input === "." && !lastElement.includes("."))) {
     content += input;
   }
   refreshScreen(content);
 }
 
-// TODO
-// function solve(equation) {
-//   const elements = equation.split(" ");
-//   let total = 0;
+function solve(equation) {
+  const elements = equation.split(" ");
+  console.log(elements);
+  let total = 0;
 
-//   for (let i = 0; i < elements.length; i += 3) {
-//     let first = elements[i];
-//     let operator = elements[i+1];
-//     let second = elements[i+2];
+  for (let i = 0; i < elements.length; i += 3) {
+    let first = elements[i];
+    let operator = elements[i+1];
+    let second = elements[i+2];
 
-//     total += operate(first, operator, second);
-//     console.log(total);
-//   }
-//   refreshScreen(total);
-// }
+    total += operate(first, operator, second);
+    console.log(total);
+  }
+  refreshScreen(total);
+}
 
 function removeWhitespace(string) {
   return string.replace(/\s/g, "");
