@@ -65,7 +65,7 @@ function solve(equation) {
   if (first && !(operator && second)) {
     total = first;
   } else if (first && operator && second) {
-    total = operate(first, operator, second)
+    total = operate(first, operator, second);
   } else {
     total = 0;
   }
@@ -75,8 +75,12 @@ function solve(equation) {
       total = operate(total, elements[i], elements[i + 1]);
     }
   }
-  console.log(total);
-  refreshScreen(total);
+  
+  if (total == "Infinity") {
+    refreshScreen("You can't divide by 0!");
+  } else {
+    refreshScreen(total);
+  }
 }
 
 function removeWhitespace(string) {
@@ -101,7 +105,7 @@ buttons.forEach((button) => {
         write(e.target.innerText);
         break;
       case classes.contains("equals"):
-        solve(displayValue);
+        displayValue ? solve(displayValue) : 0;
         break;
     }
   });
